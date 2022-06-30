@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta http-equiv="x-ua-compatible" content="IE=edge" >
+<meta name="viewport" content="width=device-width, height=device-height, initial-scale=1, maximum-scale=1, minimum-scale=1, user-scalable=no"/>
+<title>rts demo</title>
+<script type="text/javascript" charset="utf-8" src="https://g.alicdn.com/AliRTC/H5RTSSdk/1.2.4/aliyun-rts-sdk.js"></script>
+<script src="https://cdn.bootcdn.net/ajax/libs/vConsole/3.3.4/vconsole.min.js"></script>
+
+</head>
+<body>
+  <div>RTS播放測試</div>
+<video controls style="width: 1300px;height: 720px;"></video>
+<script>
+  // var vConsole = new VConsole();
+var aliRts = null;
+
+  aliRts = new AliRTS()
+
+aliRts.isSupport(true).then(re=> { 
+    // 可用 
+  aliRts.startLiveStream('artc://播放地址',document.getElementsByTagName('video')[0])
+}).catch(err=> { 
+  // 不可用 
+  console.log(`not support errorCode: ${err.errorCode}`); 
+  console.log(`not support message: ${err.message}`); 
+})
+
+aliRts.on("onError", (err)=> {
+  console.log(`errorCode: ${err.errorCode}`);
+  console.log(`message: ${err.message}`);
+})
+</script>
+</body>
